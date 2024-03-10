@@ -2,7 +2,7 @@ public class VariableNamesTheme {
     public static void main(String[] args) {
         System.out.println("1. Разные переменные");
         // цифра
-        char digit = '7';
+        int digit = 7;
         System.out.println("цифра = " + digit);
 
         // Сумма чисел
@@ -22,7 +22,7 @@ public class VariableNamesTheme {
         System.out.println("количество десятков = " + tenCount);
 
         // вес собаки
-        double dogWeight = 8.4;
+        float dogWeight = 8.4f;
         System.out.println("вес собаки = " + dogWeight);
 
         // исходное число
@@ -114,8 +114,8 @@ public class VariableNamesTheme {
         System.out.println("путь до файла = " + filePath);
 
         // количество чисел в каждой строке
-        int eachLineNumberCount = 2;
-        System.out.println("количество чисел в каждой строке = " + eachLineNumberCount);
+        int numbersInRow = 2;
+        System.out.println("количество чисел в каждой строке = " + numbersInRow);
 
         System.out.println("\n2. Логические переменные");
         // сотни равны?
@@ -143,8 +143,8 @@ public class VariableNamesTheme {
         System.out.println("активное = " + active);
 
         // новый?
-        boolean fresh = false;
-        System.out.println("новый = " + fresh);
+        boolean isNew = false;
+        System.out.println("новый = " + isNew);
 
         // электронная почта действительная?
         boolean validEmail = true;
@@ -164,8 +164,8 @@ public class VariableNamesTheme {
         System.out.println("производитель оперативной памяти = " + ramVendor);
 
         // емкость жесткого диска
-        int hdCapacity = 500;
-        System.out.println("емкость жесткого диска = " + hdCapacity);
+        int hddCapacity = 500;
+        System.out.println("емкость жесткого диска = " + hddCapacity);
 
         // протокол передачи гипертекста
         String http = "http";
@@ -180,7 +180,7 @@ public class VariableNamesTheme {
         System.out.println("новый идентификатор клиента = " + newClientId);
 
         // кодировка american standard code for information interchange
-        String asciiCode = "ascii";
-        System.out.println("кодировка american standard code for information interchange = " + asciiCode);
+        String ascii = "ascii";
+        System.out.println("кодировка american standard code for information interchange = " + ascii);
     }
 }
