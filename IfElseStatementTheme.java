@@ -25,11 +25,11 @@ public class IfElseStatementTheme {
         String name = "Ivan";
         char nameFirstLetter = name.charAt(0);
         if (nameFirstLetter == 'M') {
-            System.out.println(name + ": ваше имя начинается на букву 'M'.");
+            System.out.println(name + ", ваше имя начинается на букву 'M'.");
         } else if (nameFirstLetter == 'I') {
-            System.out.println(name + ": ваше имя начинается на букву 'I'.");
+            System.out.println(name + ", ваше имя начинается на букву 'I'.");
         } else {
-            System.out.println(name + ": ваше имя начинается на другую букву.");
+            System.out.println(name + ", ваше имя начинается на другую букву.");
         }
 
         System.out.println("\n2. Поиск большего числа");
@@ -70,17 +70,16 @@ public class IfElseStatementTheme {
         int hundreds2 = number2 / 100;
         int tens1 = number1 / 10 % 10;
         int tens2 = number2 / 10 % 10;
-        int units1 = number1 % 10;
-        int units2 = number2 % 10;
+        int ones1 = number1 % 10;
+        int ones2 = number2 % 10;
         boolean equalHundreds = hundreds1 == hundreds2;
         boolean equalTens = tens1 == tens2;
-        boolean equalUnits = units1 == units2;
-        boolean foundEqualDigits = equalHundreds || equalTens || equalUnits;
-        if (foundEqualDigits) {
+        boolean equalOnes = ones1 == ones2;
+        if (equalHundreds || equalTens || equalOnes) {
             System.out.printf("Исходные числа: %d и %d%n", number1, number2);
             System.out.println("Одинаковые цифры:");
-            if (equalUnits) {
-                System.out.println(units1 + " - разряд 1");
+            if (equalOnes) {
+                System.out.println(ones1 + " - разряд 1");
             }
 
             if (equalTens) {
@@ -101,7 +100,7 @@ public class IfElseStatementTheme {
             answer = "маленькой буквой";
         } else if (symbol >= 'A' && symbol <= 'Z') {
             answer = "большой буквой";
-        } else if (symbol >= 0 && symbol <= '9') {
+        } else if (symbol >= '0' && symbol <= '9') {
             answer = "цифрой";
         }
 
@@ -129,37 +128,35 @@ public class IfElseStatementTheme {
 
         System.out.println("\n7. Определение оценки по предметам");
         int historyPercent = 59;
-        int programmingPercent = 92;
-        int historyGrade;
+        int historyGrade = 2;
         if (historyPercent > 91) {
             historyGrade = 5;
         } else if (historyPercent > 73) {
             historyGrade = 4;
         } else if (historyPercent > 60) {
             historyGrade = 3;
-        } else {
-            historyGrade = 2;
         }
-        int programmingGrade;
+
+        int programmingPercent = 92;
+        int programmingGrade = 2;
         if (programmingPercent > 91) {
             programmingGrade = 5;
         } else if (programmingPercent > 73) {
             programmingGrade = 4;
         } else if (programmingPercent > 60) {
             programmingGrade = 3;
-        } else {
-            programmingGrade = 2;
         }
+
         System.out.println("История - " + historyGrade);
         System.out.println("Программирование - " + programmingGrade);
         System.out.println("Средний балл - " + (historyGrade + programmingGrade) / 2.0);
         System.out.println("Средний % по предметам - " + (historyPercent + programmingPercent) / 2.0);
 
         System.out.println("\n8. Расчет годовой прибыли");
-        int cost = 13_000;
-        int rentCost = 5_000;
+        int revenue = 13_000;
+        int rent = 5_000;
         int primeCost = 9_000;
-        int profit = (cost - rentCost - primeCost) * 12;
+        int profit = (revenue - rent - primeCost) * 12;
         if (profit != 0) {
             System.out.printf("Прибыль за год: %,+d руб.%n", profit);
         } else {
