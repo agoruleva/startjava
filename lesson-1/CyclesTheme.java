@@ -84,7 +84,7 @@ public class CyclesTheme {
             }
             numberCopy /= 10;
         }
-        
+
         String answer;
         if (twoCount % 2 == 0) {
             answer = "чётное";
@@ -165,7 +165,6 @@ public class CyclesTheme {
         }
         System.out.printf("Сумма цифр %d = %d, а сумма %d = %d%n",
                 leftHalf, leftHalfSum, rightHalf, rightHalfSum);
-
 
         System.out.println("\n10. Отображение таблицы умножения Пифагора");
         System.out.println("\tТАБЛИЦА ПИФАГОРА");
