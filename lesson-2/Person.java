@@ -1,7 +1,7 @@
 public class Person {
-    char sex = 'm';
+    boolean male = true;
     String name = "Иванов Иван Иванович";
-    float height = 1.82f;
+    double height = 1.82;
     double weight = 76.3;
     int age = 34;
 
@@ -9,7 +9,7 @@ public class Person {
         System.out.println("Идёт");
     }
 
-    void seat() {
+    void sit() {
         System.out.println("Сидит");
     }
 
@@ -22,6 +22,6 @@ public class Person {
     }
 
     void learnJava() {
-        System.out.println("Учит Java");
+        System.out.println("Изучает Java");
     }
 }
