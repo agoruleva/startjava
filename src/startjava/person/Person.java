@@ -1,3 +1,5 @@
+package startjava.person;
+
 public class Person {
     boolean male = true;
     String name = "Иванов Иван Иванович";
