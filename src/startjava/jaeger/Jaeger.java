@@ -1,3 +1,5 @@
+package startjava.jaeger;
+
 import java.time.LocalDate;
 
 public class Jaeger {

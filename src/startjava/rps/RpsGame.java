@@ -1,3 +1,5 @@
+package startjava.rps;
+
 import java.util.Random;
 
 public class RpsGame {
