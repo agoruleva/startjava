@@ -1,70 +1,76 @@
 package startjava.rps;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class RpsGame {
+    private static final String ROCK = "✊";
+    private static final String SCISSORS = "✌️";
+    private static final String PAPER = "✋";
+
     public static void main(String[] args) throws InterruptedException {
-        String rock = "✊";
-        String scissors = "✌\uFE0F";
-        String paper = "✋";
-
-        // Ход первого игрока
-        String name1 = "HEL";
         Random r = new Random();
-        int position1 = r.nextInt(1, 100);
-        String sign1 = rock;
-        if (position1 > 66) {
-            sign1 = paper;
-        } else if (position1 > 33) {
-            sign1 = scissors;
+        Scanner console = new Scanner(System.in);
+        String name1 = inputName(console);
+        String name2 = inputName(console);
+
+        int position = generatePosition(name1, r);
+        String sign1 = defineSign(position);
+        showSign(sign1);
+
+        position = generatePosition(name2, r);
+        String sign2 = defineSign(position);
+        showSign(sign2);
+
+        defineWinner(name1, sign1, name2, sign2);
+    }
+
+    private static String inputName(Scanner console) {
+        System.out.print("Введите имя игрока: ");
+        return console.nextLine();
+    }
+
+    private static int generatePosition(String name, Random r) {
+        System.out.println("Ход " + name + ":");
+        return r.nextInt(1, 100);
+    }
+
+    private static String defineSign(int position) {
+        String sign = ROCK;
+        if (position > 66) {
+            sign = SCISSORS;
+        } else if (position > 33) {
+            sign = PAPER;
         }
+        return sign;
+    }
 
-        System.out.println("Ход " + name1 + ": ");
-
+    private static void showSign(String sign) throws InterruptedException {
         for (int i = 0; i < 5; ++i) {
-            System.out.print(rock + '\r');
+            System.out.print(ROCK + '\r');
             Thread.sleep(100);
-            System.out.print(scissors + "\r");
+            System.out.print(SCISSORS + '\r');
             Thread.sleep(100);
-            System.out.print(paper + "\r");
-            Thread.sleep(100);
-        }
-        System.out.println(sign1);
-
-        // Ход второго игрока
-        String name2 = "WALLE";
-        int position2 = r.nextInt(1, 100);
-        String sign2 = rock;
-        if (position2 > 66) {
-            sign2 = paper;
-        } else if (position2 > 33) {
-            sign2 = scissors;
-        }
-        System.out.println("Ход " + name2 + ": ");
-
-        for (int i = 0; i < 5; ++i) {
-            System.out.print(rock + '\r');
-            Thread.sleep(100);
-            System.out.print(scissors + '\r');
-            Thread.sleep(100);
-            System.out.print(paper + '\r');
+            System.out.print(PAPER + '\r');
             Thread.sleep(100);
         }
-        System.out.println(sign2);
+        System.out.println(sign);
+    }
 
+    private static void defineWinner(String name1, String sign1, String name2, String sign2) {
         if (sign1.equals(sign2)) {
-            System.out.println("Победила дружба!");
+            System.out.println("\nПобедила дружба!");
             return;
         }
 
-        boolean isName1Equal = sign1.equals(rock) && sign2.equals(scissors) ||
-                sign1.equals(scissors) && sign2.equals(paper) ||
-                sign1.equals(paper) && sign2.equals(rock);
+        boolean isEqualName1 = sign1.equals(ROCK) && sign2.equals(SCISSORS)
+                || sign1.equals(SCISSORS) && sign2.equals(PAPER)
+                || sign1.equals(PAPER) && sign2.equals(ROCK);
 
-        if (isName1Equal) {
-            System.out.println("\nПобедил - " + name1);
+        if (isEqualName1) {
+            System.out.println("\nПобедил " + name1);
         } else {
-            System.out.println("\nПобедил - " + name2);
+            System.out.println("\nПобедил " + name2);
         }
     }
 }
