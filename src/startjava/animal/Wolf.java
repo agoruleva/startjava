@@ -1,18 +1,18 @@
 package startjava.animal;
 
 public class Wolf {
-    private char sex;
+    private boolean male;
     private String name;
     private double weight;
     private int age;
     private String color;
 
-    public char getSex() {
-        return sex;
+    public boolean getMale() {
+        return male;
     }
 
-    public void setSex(char sex) {
-        this.sex = sex;
+    public void setMale(boolean male) {
+        this.male = male;
     }
 
     public String getName() {
@@ -38,8 +38,9 @@ public class Wolf {
     public void setAge(int age) {
         if (age > 8) {
             System.out.println("Некорректный возраст");
+        } else {
+            this.age = age;
         }
-        this.age = age;
     }
 
     public String getColor() {

@@ -3,14 +3,14 @@ package startjava.animal;
 public class WolfTest {
     public static void main(String[] args) {
         Wolf wolf = new Wolf();
-        wolf.setSex('m');
+        wolf.setMale(true);
         wolf.setName("Белый клык");
         wolf.setWeight(92.3);
         wolf.setAge(5);
         wolf.setColor("Серый");
 
         System.out.println("Волк");
-        System.out.println("пол: " + wolf.getSex());
+        System.out.println("пол: " + (wolf.getMale() ? "м" : "ж"));
         System.out.println("кличка: " + wolf.getName());
         System.out.printf("вес: %.2f кг%n", wolf.getWeight());
         System.out.printf("возраст: %d лет%n", wolf.getAge());
