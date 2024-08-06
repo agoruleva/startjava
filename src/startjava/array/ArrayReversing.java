@@ -2,20 +2,23 @@ package startjava.array;
 
 import java.util.Arrays;
 
-public class ArraysReversing {
+public class ArrayReversing {
     public static void main(String[] args) {
-        reverseArrayValues(new int[0]);
-        reverseArrayValues(null);
-        reverseArrayValues(new int[]{6, 8, 9, 1});
-        reverseArrayValues(new int[]{13, 8, 5, 3, 2, 1, 1});
+        reverseArray(new int[0]);
+        reverseArray(null);
+        reverseArray(new int[]{6, 8, 9, 1});
+        reverseArray(new int[]{13, 8, 5, 3, 2, 1, 1});
     }
 
-    private static void reverseArrayValues(int[] numbers) {
+    private static void reverseArray(int[] numbers) {
         System.out.println();
-        display("   До реверса: ", numbers);
-        if (numbers != null) {
-            reverse(numbers);
+        if (numbers == null) {
+            System.out.println("Ошибка: массив не может быть null");
+            return;
         }
+
+        display("   До реверса: ", numbers);
+        reverse(numbers);
         display("После реверса: ", numbers);
     }
 
@@ -34,6 +37,4 @@ public class ArraysReversing {
         array[left] = array[right];
         array[right] = temp;
     }
-
-
 }

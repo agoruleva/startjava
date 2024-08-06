@@ -2,17 +2,17 @@ package startjava.array;
 
 public class CharacterPyramid {
     public static void main(String[] args) {
-        displayCharacterPyramid('0', '9', true);
-        displayCharacterPyramid('/', '!', false);
-        displayCharacterPyramid('A', 'J', false);
+        displayPyramid('0', '9', true);
+        displayPyramid('/', '!', false);
+        displayPyramid('A', 'J', false);
     }
 
-    private static void displayCharacterPyramid(char begin, char end, boolean ascending) {
+    private static void displayPyramid(char from, char to, boolean ascending) {
         System.out.println();
-        final Range range = Range.make(begin, end, ascending);
-        final StringBuilder row = createRow(range.length());
-        for (int i = 0; i < range.length(); ++i) {
-            build(row, i, range);
+        final char[] sequence = makeSequence(from, to, ascending);
+        final StringBuilder row = createRow(sequence.length);
+        for (int i = 0; i < sequence.length; ++i) {
+            build(row, i, sequence);
             System.out.println(row);
         }
     }
@@ -21,27 +21,25 @@ public class CharacterPyramid {
         return new StringBuilder(" ".repeat(2 * length + 1));
     }
 
-    private static void build(StringBuilder row, int i, Range range) {
-        final char currentCharacter = (char) (range.start() + i * range.step());
-        for (int j = range.length() - i - 1; j <= range.length() + i - 1; ++j) {
-            row.setCharAt(j, currentCharacter);
+    private static void build(StringBuilder row, int i, char[] sequence) {
+        for (int j = sequence.length - i - 1; j <= sequence.length + i - 1; ++j) {
+            row.setCharAt(j, sequence[i]);
         }
     }
 
-    private record Range(int start, int end, int length, int step) {
-        private Range(int start, int end, int length, int step) {
-            this.start = start;
-            this.end = end;
-            this.length = length;
-            this.step = step;
+    private static char[] makeSequence(int from, int to, boolean ascending) {
+        if (from > to) {
+            final int temp = from;
+            from = to;
+            to = temp;
         }
 
-        public static Range make(int first, int last, boolean ascending) {
-            final int minCode = Math.min(first, last);
-            final int maxCode = Math.max(first, last);
-            final int length = maxCode - minCode + 1;
-            return ascending ? new Range(minCode, maxCode, length, 1)
-                             : new Range(maxCode, minCode, length, -1);
+        final int length = to - from + 1;
+        char[] sequence = new char[length];
+        for (int i = 0; i < length; ++i) {
+            sequence[i] = (char) (ascending ? (from + i) : (to - i));
         }
+
+        return sequence;
     }
 }

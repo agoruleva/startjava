@@ -1,17 +1,7 @@
 package startjava.array;
 
-import static java.lang.Character.isLetterOrDigit;
-
 public class TypewriterEffectEmulator {
-    private static final long DELAY_VALUE = 250;
-    private static final char HYPHEN = '-';
-
-    private enum State {
-        OUT_OF_WORD,
-        IN_WORD,
-        AT_HYPHEN,
-        WITH_HYPHEN
-    }
+    private static final long DELAY_VALUE = 100;
 
     public static void main(String[] args) throws InterruptedException {
         displayWithDelay("""
@@ -33,11 +23,13 @@ public class TypewriterEffectEmulator {
     }
 
     private static void displayWithDelay(String text) throws InterruptedException {
+        System.out.println();
         if (text == null || text.isBlank()) {
+            System.out.println("Ошибка: строка не может быть пустой или null");
             return;
         }
 
-        final Range range = getUpperRange(text);
+        final Range range = getUpperCaseRange(text);
         final CharSequence transformedText = transform(text, range);
         display(transformedText);
     }
@@ -51,7 +43,6 @@ public class TypewriterEffectEmulator {
     }
 
     private static void display(CharSequence text) throws InterruptedException {
-        System.out.println();
         for (int i = 0; i < text.length(); ++i) {
             System.out.print(text.charAt(i));
             delay();
@@ -62,49 +53,46 @@ public class TypewriterEffectEmulator {
         Thread.sleep(DELAY_VALUE);
     }
 
-    private static Range getUpperRange(String text) {
-        State state = State.OUT_OF_WORD;
-        int length = 0;
-        int begin = 0;
-        int minLength = text.length();
-        int maxLength = 0;
-        int minBegin = 0;
-        int maxBegin = 0;
+    private static Range getUpperCaseRange(String originalText) {
+        final String[] words = originalText.split("\\s+");
+        final int[] wordBegins = getWordBegins(words, originalText);
+        String shortestWord = words[0];
+        String longestWord = words[0];
+        int upperCaseStart = 0;
+        int upperCaseEnd = 0;
 
-        for (int i = 0; i < text.length(); ++i) {
-            final char ch = text.charAt(i);
-            if (isLetterOrDigit(ch)) {
-                switch (state) {
-                    case OUT_OF_WORD -> {
-                        state = State.IN_WORD;
-                        length = 1;
-                        begin = i;
-                    }
-                    case IN_WORD, WITH_HYPHEN -> ++length;
-                    case AT_HYPHEN -> {
-                        length += 2;
-                        state = State.WITH_HYPHEN;
-                    }
-                    default -> { }
-                }
-            } else if (state != State.OUT_OF_WORD) {
-                state = (state == State.IN_WORD && ch == HYPHEN) ? State.AT_HYPHEN : State.OUT_OF_WORD;
+        for (int i = 0; i < words.length; ++i) {
+            String noPunctuation = words[i].replaceAll("\\p{P}+", "");
+            if (noPunctuation.isEmpty()) {
+                continue;
             }
 
-            if (state == State.OUT_OF_WORD || i + 1 == text.length()) {
-                if (length > maxLength) {
-                    maxLength = length;
-                    maxBegin = begin;
-                }
-
-                if (length < minLength) {
-                    minLength = length;
-                    minBegin = begin;
-                }
+            if (noPunctuation.length() < shortestWord.length()) {
+                shortestWord = noPunctuation;
+                upperCaseStart = i;
+            } else if (noPunctuation.length() > longestWord.length()) {
+                longestWord = noPunctuation;
+                upperCaseEnd = i;
             }
         }
 
-        return minBegin < maxBegin ? new Range(minBegin, maxBegin + maxLength)
-                : new Range(maxBegin, minBegin + minLength);
+        if (upperCaseStart > upperCaseEnd) {
+            final int temp = upperCaseStart;
+            upperCaseStart = upperCaseEnd;
+            upperCaseEnd = temp;
+        }
+
+        return new Range(wordBegins[upperCaseStart], wordBegins[upperCaseEnd] + words[upperCaseEnd].length());
+    }
+
+    private static int[] getWordBegins(String[] words, String originalText) {
+        final int[] begins = new int[words.length];
+
+        for (int i = 0, offset = 0; i < words.length; ++i) {
+            begins[i] = originalText.indexOf(words[i], offset);
+            offset = begins[i] + words[i].length();
+        }
+
+        return begins;
     }
 }

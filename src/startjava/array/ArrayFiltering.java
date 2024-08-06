@@ -4,7 +4,7 @@ public class ArrayFiltering {
     private static final int SIZE = 15;
 
     public static void main(String[] args) {
-        final double[] randomNumbers = generateRandomArray(SIZE);
+        final double[] randomNumbers = generateRandomArray();
         filterArray(randomNumbers.clone(), -1);
         filterArray(randomNumbers.clone(), 15);
         filterArray(randomNumbers.clone(), 0);
@@ -12,8 +12,8 @@ public class ArrayFiltering {
         filterArray(randomNumbers.clone(), SIZE - SIZE / 2);
     }
 
-    private static double[] generateRandomArray(int size) {
-        double[] randomNumbers = new double[size];
+    private static double[] generateRandomArray() {
+        double[] randomNumbers = new double[SIZE];
         for (int i = 0; i < randomNumbers.length; ++i) {
             randomNumbers[i] = Math.random();
         }
@@ -22,18 +22,19 @@ public class ArrayFiltering {
 
     private static void filterArray(double[] data, int index) {
         System.out.println();
-        display(data, "Исходный массив");
         if (isValidIndex(data, index)) {
-            int zeroCount = filterElements(data, index);
+            display(data, "Исходный массив");
+            int zeroCount = filter(data, index);
             display(data, "Изменённый массив");
             System.out.printf("Значение в ячейке [%d] = %.3f%n", index, data[index]);
             System.out.printf("Количество обнулённых ячеек: %d%n", zeroCount);
         } else {
-            System.out.printf("Ошибка: неверный индекс ячейки (%d)%n", index);
+            System.out.printf("Ошибка: неверный индекс ячейки (%d), должен быть от 0 до %d%n",
+                    index, data.length - 1);
         }
     }
 
-    private static int filterElements(double[] data, int index) {
+    private static int filter(double[] data, int index) {
         int zeroCount = 0;
         for (int i = 0; i < data.length; ++i) {
             if (data[i] > data[index]) {

@@ -8,48 +8,48 @@ public class UniqueRandomNumbersTable {
     private static final int NOT_FOUND = -1;
 
     public static void main(String[] args) {
-        displayTable(23, -10, 20);
-        displayTable(10, 60, 100);
-        displayTable(0, 34, -34);
-        displayTable(-8, 0, 0);
+        display(-10, 20, 23);
+        display(-30, 10, 10);
+        display(34, -34, 0);
+        display(-1, 2, -3);
     }
 
-    private static void displayTable(int columnCount, int begin, int end) {
+    private static void display(int begin, int end, int count) {
         System.out.println();
-        if (columnCount < 1) {
-            System.out.printf("Ошибка: количество чисел в строке не может быть меньше 1 (%d)%n", columnCount);
+        if (count < 1) {
+            System.out.printf("Ошибка: количество чисел в строке не может быть меньше 1 (%d)%n", count);
             return;
         }
 
-        final int lowerBound = Math.min(begin, end);
-        final int upperBound = Math.max(begin, end);
-        final int intervalLength = upperBound - lowerBound + 1;
-        final int length = 3 * intervalLength / 4;
-        final int[] uniqueNumbers = generateUniqueNumbers(length, lowerBound, upperBound);
-        Arrays.sort(uniqueNumbers);
-        displayTable(uniqueNumbers, columnCount);
+        if (begin > end) {
+            final int temp = begin;
+            begin = end;
+            end = temp;
+        }
+
+        final int length = 3 * (end - begin + 1) / 4;
+        if (length < 1) {
+            System.out.printf("Ошибка: длина массива должна быть больше 0 (%d)%n", length);
+            return;
+        }
+
+        final int[] uniqueNumbers = generateUniqueNumbers(length, begin, end);
+        display(uniqueNumbers, count);
     }
 
-    private static void displayTable(int[] numbers, int columnCount) {
-        final int rowCount = (numbers.length + columnCount - 1) / columnCount;
-        for (int r = 0, index = 0; r < rowCount; ++r) {
-            for (int c = 0, bound = Math.min(columnCount, numbers.length - index); c < bound; ++c, ++index) {
-                System.out.printf("%5d", numbers[index]);
-            }
-            System.out.println();
+    private static void display(int[] numbers, int columnCount) {
+        for (int i = 0; i < numbers.length; ++i) {
+            System.out.printf("%4d%s", numbers[i], (i + 1) % columnCount == 0 ? System.lineSeparator() : "");
         }
     }
 
     private static int[] generateUniqueNumbers(int length, int low, int high) {
         final int[] numbers = new int[length];
-        fillArray(numbers, low, high);
-        return numbers;
-    }
-
-    private static void fillArray(int[] numbers, int low, int high) {
         for (int i = 0; i < numbers.length; ++i) {
             numbers[i] = getNextUniqueNumber(numbers, i, low, high);
         }
+        Arrays.sort(numbers);
+        return numbers;
     }
 
     private static int getNextUniqueNumber(int[] numbers, int length, int low, int high) {
