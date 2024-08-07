@@ -17,8 +17,8 @@ public class Jaeger {
         this("unknown", LocalDate.now(), 0, "unknown", 0, 0, 0, 0, 0);
     }
 
-    public Jaeger(String modelName, LocalDate launchDate, int mark, String origin, double height, double weight,
-            int speed, int strength, int armor) {
+    public Jaeger(String modelName, LocalDate launchDate, int mark, String origin,
+                  double height, double weight, int speed, int strength, int armor) {
         this.modelName = modelName;
         this.launchDate = launchDate;
         this.mark = mark;

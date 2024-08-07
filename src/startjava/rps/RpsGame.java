@@ -63,9 +63,9 @@ public class RpsGame {
             return;
         }
 
-        boolean isEqualName1 = sign1.equals(ROCK) && sign2.equals(SCISSORS)
-                || sign1.equals(SCISSORS) && sign2.equals(PAPER)
-                || sign1.equals(PAPER) && sign2.equals(ROCK);
+        boolean isEqualName1 = sign1.equals(ROCK) && sign2.equals(SCISSORS) ||
+                sign1.equals(SCISSORS) && sign2.equals(PAPER) ||
+                sign1.equals(PAPER) && sign2.equals(ROCK);
 
         if (isEqualName1) {
             System.out.println("\nПобедил " + name1);
