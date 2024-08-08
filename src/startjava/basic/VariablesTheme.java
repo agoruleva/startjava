@@ -1,5 +1,8 @@
 package startjava.basic;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class VariablesTheme {
     public static void main(String[] args) {
         System.out.println("1. Вывод характеристик компьютера");
@@ -21,12 +24,11 @@ public class VariablesTheme {
         System.out.println("Корневой каталог: " + rootDirectory);
 
         System.out.println("\n2. Расчет стоимости товара со скидкой");
-        final int fullPercent = 100;
-        int penPrice = 100;
-        int bookPrice = 200;
-        int totalSum = penPrice + bookPrice;
-        int discount = 11;
-        int discountSum = totalSum * discount / fullPercent;
+        double penPrice = 105.5;
+        double bookPrice = 235.83;
+        double totalSum = penPrice + bookPrice;
+        final double discount = 0.11;
+        double discountSum = totalSum * discount;
         System.out.println("Общая стоимость без скидки = " + totalSum);
         System.out.println("Сумма скидки = " + discountSum);
         System.out.println("Общая стоимость товаров со скидкой = " + (totalSum - discountSum));
@@ -126,5 +128,16 @@ public class VariablesTheme {
         System.out.printf("%02d:%02d:%02d%n",
                 time / secondsPerHour, time % secondsPerHour / secondsPerMinute,
                 time % secondsPerMinute);
+
+        System.out.println("\n10. *Расчёт стоимости товаров со скидкой");
+        final BigDecimal priceOfPen = new BigDecimal("105.5");
+        final BigDecimal priceOfBook = new BigDecimal("235.83");
+        final BigDecimal valueOfDiscount = new BigDecimal("0.11");
+        BigDecimal total = priceOfPen.add(priceOfBook).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal sumOfDiscount = total.multiply(valueOfDiscount).setScale(2, RoundingMode.HALF_UP);
+        System.out.println("Общая стоимость без скидки = " + total);
+        System.out.println("Сумма скидки = " + sumOfDiscount);
+        System.out.println("Общая стоимость товаров со скидкой = " +
+                total.subtract(sumOfDiscount).setScale(2, RoundingMode.HALF_UP));
     }
 }
