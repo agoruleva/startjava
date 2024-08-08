@@ -1,5 +1,8 @@
 package startjava.basic;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class IfElseStatementTheme {
     public static void main(String[] args) {
         System.out.println("1. Перевод псевдокода на язык Java");
@@ -106,18 +109,17 @@ public class IfElseStatementTheme {
             System.out.printf("Символ %c не является ни буквой, ни цифрой%n", symbol);
         }
 
-        System.out.println("\n6. Подсчет суммы вклада и начисленных банком %");
-        final int fullPercent = 100;
-        int sum = 301_000;
-        int interestRate;
+        System.out.println("\n6. Подсчет начисленных банком %");
+        double sum = 321_123.59;
+        double interestRate;
         if (sum < 100_000) {
-            interestRate = 5;
+            interestRate = 0.05;
         } else if (sum > 300_000) {
-            interestRate = 10;
+            interestRate = 0.1;
         } else {
-            interestRate = 7;
+            interestRate = 0.7;
         }
-        int accruedInterest = sum * interestRate / fullPercent;
+        double accruedInterest = sum * interestRate;
         System.out.println("Сумма вклада = " + sum);
         System.out.println("Начисленный % = " + accruedInterest);
         System.out.println("Итоговая сумма = " + (sum + accruedInterest));
@@ -149,14 +151,41 @@ public class IfElseStatementTheme {
         System.out.println("Средний % по предметам - " + (historyPercent + programmingPercent) / 2.0);
 
         System.out.println("\n8. Расчет годовой прибыли");
-        int revenue = 13_000;
-        int rent = 5_000;
-        int primeCost = 9_000;
-        int profit = (revenue - rent - primeCost) * 12;
+        double revenue = 13025.233;
+        double rent = 5123.018;
+        double primeCost = 9001.729;
+        double profit = (revenue - rent - primeCost) * 12;
         if (profit != 0) {
-            System.out.printf("Прибыль за год: %,+d руб.%n", profit);
+            System.out.printf("Прибыль за год: %,+f руб.%n", profit);
         } else {
             System.out.println("Прибыль за год: 0 руб.");
         }
+
+        System.out.println("\n9. *Расчет годовой прибыли");
+        BigDecimal revenue1 = new BigDecimal("13025.233");
+        BigDecimal rent1 = new BigDecimal("5123.018");
+        BigDecimal primeCost1 = new BigDecimal("9001.729");
+        BigDecimal profit1 = revenue1.subtract(rent1).subtract(primeCost1).multiply(BigDecimal.valueOf(12L));
+        if (profit1.compareTo(BigDecimal.ZERO) != 0) {
+            System.out.printf("Прибыль за год: %,+.2f руб.%n", profit1);
+        } else {
+            System.out.println("Прибыль за год: 0 руб.");
+        }
+
+        System.out.println("\n10. *Подсчет начисленных банком %");
+        BigDecimal sum1 = new BigDecimal("321123.59");
+        BigDecimal interestRate1;
+        if (sum1.compareTo(BigDecimal.valueOf(100_000L)) < 0) {
+            interestRate1 = new BigDecimal("0.05");
+        } else if (sum1.compareTo(BigDecimal.valueOf(300_000L)) > 0) {
+            interestRate1 = new BigDecimal("0.1");
+        } else {
+            interestRate1 = new BigDecimal("0.07");
+        }
+        BigDecimal accruedInterest1 = sum1.multiply(interestRate1).setScale(2, RoundingMode.HALF_UP);
+        System.out.println("Сумма вклада = " + sum1);
+        System.out.println("Начисленный % = " + accruedInterest1);
+        System.out.println("Итоговая сумма = " +
+                sum1.add(accruedInterest1).setScale(2, RoundingMode.HALF_UP));
     }
 }
