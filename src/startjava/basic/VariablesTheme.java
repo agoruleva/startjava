@@ -9,27 +9,27 @@ public class VariablesTheme {
         long diskStorageVolume = 536870912;
         float screenDiagonal = 15.6f;
         double storageSize = 2.5;
-        char storageType = 's';
-        boolean hasExternalGpu = true;
+        char rootDirectory = '/';
+        boolean hasTouchScreen = true;
         System.out.println("Количество ядер процессора: " + cpuCoreNumber);
         System.out.println("Частота процессора, МГц: " + cpuFrequency);
         System.out.println("Диагональ экрана, дюймы: " + screenDiagonal);
         System.out.println("Частота обновления экрана, Гц: " + refreshRate);
+        System.out.println("Сенсорный экран: " + hasTouchScreen);
         System.out.println("Объём накопителя, байты: " + diskStorageVolume);
         System.out.println("Форм-фактор накопителя, дюймы: " + storageSize);
-        System.out.println("Тип накопителя (s - SSD/h - hHDD): " + storageType);
-        System.out.println("Видеокарта: " + (hasExternalGpu ? "дискретная" : "встроенная"));
+        System.out.println("Корневой каталог: " + rootDirectory);
 
         System.out.println("\n2. Расчет стоимости товара со скидкой");
-        final int FULL_PERCENT = 100;
+        final int fullPercent = 100;
         int penPrice = 100;
         int bookPrice = 200;
         int totalSum = penPrice + bookPrice;
         int discount = 11;
-        int discountValue = totalSum * discount / FULL_PERCENT;
+        int discountSum = totalSum * discount / fullPercent;
         System.out.println("Общая стоимость без скидки = " + totalSum);
-        System.out.println("Сумма скидки = " + discountValue);
-        System.out.println("Общая стоимость товаров со скидкой = " + (totalSum - discountValue));
+        System.out.println("Сумма скидки = " + discountSum);
+        System.out.println("Общая стоимость товаров со скидкой = " + (totalSum - discountSum));
 
         System.out.println("\n3. Вывод слова JAVA");
         System.out.println("   J    a  v     v  a");
@@ -104,30 +104,27 @@ public class VariablesTheme {
         System.out.println("  " + slash + underscore + leftParenthesis + ' ' + rightParenthesis + backslash);
         System.out.println(" " + slash + "      " + backslash);
         System.out.println("" + slash + underscore + underscore + underscore + underscore +
-             slash + backslash + underscore + underscore + backslash);
+                slash + backslash + underscore + underscore + backslash);
 
         System.out.println("\n8. Вывод количества сотен, десятков и единиц числа");
-        int number = 123;
+        final int number = 543;
         int ones = number % 10;
         int tens = number / 10 % 10;
         int hundreds = number / 100;
-        int digitSum = ones + tens + hundreds;
-        int digitProduct = ones * tens * hundreds;
         System.out.println("Число " + number + " содержит:");
         System.out.println("  сотен - " + hundreds);
         System.out.println("  десятков - " + tens);
         System.out.println("  единиц - " + ones);
-        System.out.println("Сумма его цифр = " + digitSum);
-        System.out.println("Произведение = " + digitProduct);
+        System.out.println("Сумма его цифр = " + (hundreds + tens + ones));
+        System.out.println("Произведение = " + (hundreds * tens * ones));
 
         System.out.println("\n9. Вывод времени");
-        final int SECONDS_PER_MINUTE = 60;
-        final int MINUTES_PER_HOUR = 60;
-        final int SECONDS_PER_HOUR = SECONDS_PER_MINUTE * MINUTES_PER_HOUR;
-        int totalSeconds = 86399;
-        int hours = totalSeconds / SECONDS_PER_HOUR;
-        int minutes = totalSeconds % SECONDS_PER_HOUR / SECONDS_PER_MINUTE;
-        int seconds = totalSeconds % SECONDS_PER_MINUTE;
-        System.out.printf("%02d:%02d:%02d%n", hours, minutes, seconds);
+        final int secondsPerMinute = 60;
+        final int minutesPerHour = 60;
+        final int secondsPerHour = secondsPerMinute * minutesPerHour;
+        final int time = 86399;
+        System.out.printf("%02d:%02d:%02d%n",
+                time / secondsPerHour, time % secondsPerHour / secondsPerMinute,
+                time % secondsPerMinute);
     }
 }

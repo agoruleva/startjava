@@ -63,15 +63,11 @@ public class VariableNamesTheme {
         String mathExpression = "(2 + 3) * 4";
         System.out.println("математическое выражение = " + mathExpression);
 
-        // выбор (чего-либо)
-        int option = 6;
-        System.out.println("выбор = " + option);
-
-        // счет (в игре)
+        // счет в игре
         int score = 25;
         System.out.println("счет = " + score);
 
-        // максимальная длина (строки)
+        // максимальная длина
         int maxLength = 47;
         System.out.println("максимальная длина = " + maxLength);
 
@@ -79,11 +75,11 @@ public class VariableNamesTheme {
         String menuIten = "File";
         System.out.println("пункт меню = " + menuIten);
 
-        // стоимость кофе на вынос
-        double coffeeToGoCost = 150.5;
-        System.out.println("стоимость кофе на вынос = " + coffeeToGoCost);
+        // стоимость кофе
+        double coffeeCost = 150.5;
+        System.out.println("стоимость кофе на вынос = " + coffeeCost);
 
-        // дата начала (чего-либо)
+        // дата начала
         String startDate = "12.02.2024";
         System.out.println("дата начала = " + startDate);
 
@@ -103,7 +99,7 @@ public class VariableNamesTheme {
         int size = 128;
         System.out.println("размер = " + size);
 
-        // вместимость (чего-либо)
+        // вместимость
         int capacity = 256;
         System.out.println("вместимость = " + capacity);
 
@@ -132,15 +128,15 @@ public class VariableNamesTheme {
         boolean hasEqualDigits = true;
         System.out.println("есть равные цифры = " + hasEqualDigits);
 
-        // (что-либо) создано?
+        // создано?
         boolean created = true;
         System.out.println("создано = " + created);
 
-        // (что-либо) пустое?
+        // пустое?
         boolean empty = false;
         System.out.println("пустое = " + empty);
 
-        // (что-либо) активное?
+        // активное?
         boolean active = true;
         System.out.println("активное = " + active);
 
@@ -182,7 +178,7 @@ public class VariableNamesTheme {
         System.out.println("новый идентификатор клиента = " + newClientId);
 
         // кодировка american standard code for information interchange
-        String ascii = "ascii";
-        System.out.println("кодировка american standard code for information interchange = " + ascii);
+        String encoding = "ASCII";
+        System.out.println("Кодировка = " + encoding);
     }
 }

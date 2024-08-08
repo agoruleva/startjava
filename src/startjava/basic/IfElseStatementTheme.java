@@ -66,30 +66,24 @@ public class IfElseStatementTheme {
         }
 
         System.out.println("\n4. Поиск одинаковых цифр в числах");
-        int number1 = 123;
-        int number2 = 223;
-        int hundreds1 = number1 / 100;
-        int hundreds2 = number2 / 100;
-        int tens1 = number1 / 10 % 10;
-        int tens2 = number2 / 10 % 10;
-        int ones1 = number1 % 10;
-        int ones2 = number2 % 10;
-        boolean equalHundreds = hundreds1 == hundreds2;
-        boolean equalTens = tens1 == tens2;
-        boolean equalOnes = ones1 == ones2;
+        final int number1 = 123;
+        final int number2 = 223;
+        boolean equalHundreds = number1 / 100 == number2 / 100;
+        boolean equalTens = number1 / 10 % 10 == number2 / 10 % 10;
+        boolean equalOnes = number1 % 10 == number2 % 10;
         if (equalHundreds || equalTens || equalOnes) {
             System.out.printf("Исходные числа: %d и %d%n", number1, number2);
             System.out.println("Одинаковые цифры:");
             if (equalOnes) {
-                System.out.println(ones1 + " - разряд 1");
+                System.out.println(number1 % 10 + " - разряд 1");
             }
 
             if (equalTens) {
-                System.out.println(tens1 + " - разряд 2");
+                System.out.println(number1 / 10 % 10 + " - разряд 2");
             }
 
             if (equalHundreds) {
-                System.out.println(hundreds1 + " - разряд 3");
+                System.out.println(number1 / 100 + " - разряд 3");
             }
         } else {
             System.out.println("Нет одинаковых цифр");
@@ -113,7 +107,7 @@ public class IfElseStatementTheme {
         }
 
         System.out.println("\n6. Подсчет суммы вклада и начисленных банком %");
-        final int FULL_PERCENT = 100;
+        final int fullPercent = 100;
         int sum = 301_000;
         int interestRate;
         if (sum < 100_000) {
@@ -123,7 +117,7 @@ public class IfElseStatementTheme {
         } else {
             interestRate = 7;
         }
-        int accruedInterest = sum * interestRate / FULL_PERCENT;
+        int accruedInterest = sum * interestRate / fullPercent;
         System.out.println("Сумма вклада = " + sum);
         System.out.println("Начисленный % = " + accruedInterest);
         System.out.println("Итоговая сумма = " + (sum + accruedInterest));
