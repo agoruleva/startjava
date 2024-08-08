@@ -131,9 +131,10 @@ public class CyclesTheme {
 
         System.out.println("\n\n7. Отображение ASCII-символов");
         System.out.println("DECIMAL   CHARACTER   DESCRIPTION");
-        for (char ch = 33; ch <= 'z'; ch += 2) {
-            if ((ch < '0' && ch % 2 != 0) || (ch >= 'a' && ch <= 'z' && ch % 2 == 0))
-                System.out.printf("  %-12d%-13c%s%n", (int) ch, ch, Character.getName(ch));
+        for (int ch = 33; ch <= 'z'; ++ch) {
+            if ((ch < '0' && ch % 2 != 0) || (ch >= 'a' && ch % 2 == 0)) {
+                System.out.printf("  %-12d%-13c%s%n", ch, ch, Character.getName(ch));
+            }
         }
 
         System.out.println("\n8. Проверка, является ли число палиндромом");
