@@ -4,31 +4,30 @@ import java.time.LocalDate;
 
 public class Jaeger {
     private String modelName;
-    private LocalDate launchDate;
     private int mark;
-    private String origin;
     private double height;
     private double weight;
-    private int speed;
-    private int strength;
-    private int armor;
+    private String status;
+    private String origin;
+    private LocalDate launchDate;
+    private int kaijuKilled;
 
-    public Jaeger() {
-        this("unknown", LocalDate.now(), 0, "unknown", 0, 0, 0, 0, 0);
-    }
-
-    public Jaeger(String modelName, LocalDate launchDate, int mark, String origin,
-                  double height, double weight, int speed, int strength, int armor) {
+    public Jaeger(String modelName, int mark, double height, double weight, String status,
+                  String origin, LocalDate launchDate, int kaijuKilled) {
         this.modelName = modelName;
-        this.launchDate = launchDate;
         this.mark = mark;
-        this.origin = origin;
         this.height = height;
         this.weight = weight;
-        this.speed = speed;
-        this.strength = strength;
-        this.armor = armor;
+        this.status = status;
+        this.origin = origin;
+        this.launchDate = launchDate;
+        this.kaijuKilled = kaijuKilled;
     }
+
+    public Jaeger() {
+        this("", 0, 0, 0, "", "", LocalDate.now(), 0);
+    }
+
 
     public String getModelName() {
         return modelName;
@@ -38,28 +37,12 @@ public class Jaeger {
         this.modelName = modelName;
     }
 
-    public LocalDate getLaunchDate() {
-        return launchDate;
-    }
-
-    public void setLaunchDate(LocalDate launchDate) {
-        this.launchDate = launchDate;
-    }
-
     public int getMark() {
         return mark;
     }
 
     public void setMark(int mark) {
         this.mark = mark;
-    }
-
-    public String getOrigin() {
-        return origin;
-    }
-
-    public void setOrigin(String origin) {
-        this.origin = origin;
     }
 
     public double getHeight() {
@@ -78,28 +61,36 @@ public class Jaeger {
         this.weight = weight;
     }
 
-    public int getSpeed() {
-        return speed;
+    public String getStatus() {
+        return status;
     }
 
-    public void setSpeed(int speed) {
-        this.speed = speed;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public int getStrength() {
-        return strength;
+    public String getOrigin() {
+        return origin;
     }
 
-    public void setStrength(int strength) {
-        this.strength = strength;
+    public void setOrigin(String origin) {
+        this.origin = origin;
     }
 
-    public int getArmor() {
-        return armor;
+    public LocalDate getLaunchDate() {
+        return launchDate;
     }
 
-    public void setArmor(int armor) {
-        this.armor = armor;
+    public void setLaunchDate(LocalDate launchDate) {
+        this.launchDate = launchDate;
+    }
+
+    public int getKaijuKilled() {
+        return kaijuKilled;
+    }
+
+    public void setKaijuKilled(int kaijuKilled) {
+        this.kaijuKilled = kaijuKilled;
     }
 
     void drift() {
