@@ -10,8 +10,9 @@ public class UniqueRandomNumbersTable {
     public static void main(String[] args) {
         display(-10, 20, 23);
         display(-30, 10, 10);
-        display(34, -34, 0);
+        display(-34, -34, 0);
         display(-1, 2, -3);
+        display(5, -8, 2);
     }
 
     private static void display(int begin, int end, int count) {
@@ -22,9 +23,8 @@ public class UniqueRandomNumbersTable {
         }
 
         if (begin > end) {
-            final int temp = begin;
-            begin = end;
-            end = temp;
+            System.out.printf("Ошибка: левая граница (%d) > правой (%d)%n", begin, end);
+            return;
         }
 
         final int length = 3 * (end - begin + 1) / 4;

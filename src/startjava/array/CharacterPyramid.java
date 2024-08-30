@@ -7,8 +7,13 @@ public class CharacterPyramid {
         displayPyramid('A', 'J', false);
     }
 
-    private static void displayPyramid(char from, char to, boolean ascending) {
+    private static void displayPyramid(int from, int to, boolean ascending) {
         System.out.println();
+        if (from > to) {
+            System.out.printf("Ошибка: левая граница %1$c(%<d) > правой %2$c(%<d)%n", from, to);
+            return;
+        }
+
         final char[] sequence = makeSequence(from, to, ascending);
         final StringBuilder row = createRow(sequence.length);
         for (int i = 0; i < sequence.length; ++i) {
@@ -28,12 +33,6 @@ public class CharacterPyramid {
     }
 
     private static char[] makeSequence(int from, int to, boolean ascending) {
-        if (from > to) {
-            final int temp = from;
-            from = to;
-            to = temp;
-        }
-
         final int length = to - from + 1;
         char[] sequence = new char[length];
         for (int i = 0; i < length; ++i) {
