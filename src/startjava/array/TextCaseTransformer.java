@@ -1,9 +1,9 @@
 package startjava.array;
 
-public class TypewriterEffectEmulator {
+public class TextCaseTransformer {
     private static final String ERROR_MESSAGE = "Ошибка: строка не может быть пустой или null";
 
-    private TypewriterEffectEmulator() {
+    private TextCaseTransformer() {
     }
 
     private record Range(int begin, int end) {

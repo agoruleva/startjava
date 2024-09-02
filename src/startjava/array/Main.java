@@ -126,7 +126,7 @@ public class Main {
                 "Впереди замаячила какая-то тень."
         };
 
-        manipulateArrays(lines, s -> displayWithDelay(TypewriterEffectEmulator.transform(s)));
+        manipulateArrays(lines, s -> displayWithDelay(TextCaseTransformer.transform(s)));
     }
 
     private static <T> void manipulateArrays(T[] parameters, Consumer<T> consumer) {

@@ -45,6 +45,7 @@ public class ConsoleOutput {
                 delay();
             }
         } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 

@@ -28,7 +28,6 @@ public class Jaeger {
         this("", 0, 0, 0, "", "", LocalDate.now(), 0);
     }
 
-
     public String getModelName() {
         return modelName;
     }
