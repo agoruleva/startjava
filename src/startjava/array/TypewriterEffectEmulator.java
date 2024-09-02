@@ -1,56 +1,25 @@
 package startjava.array;
 
 public class TypewriterEffectEmulator {
-    private static final long DELAY_VALUE = 100;
+    private static final String ERROR_MESSAGE = "Ошибка: строка не может быть пустой или null";
 
-    public static void main(String[] args) throws InterruptedException {
-        displayWithDelay("""
-                Java - это C++, из которого убрали все пистолеты, ножи и дубинки.
-                - James Gosling
-                """);
-
-        displayWithDelay("""
-                Чтобы написать чистый код, мы сначала пишем грязный код, затем рефакторим его.
-                - Robert Martin
-                """);
-
-        displayWithDelay(null);
-        displayWithDelay("");
-        displayWithDelay("Впереди замаячила какая-то тень.");
+    private TypewriterEffectEmulator() {
     }
 
     private record Range(int begin, int end) {
     }
 
-    private static void displayWithDelay(String text) throws InterruptedException {
-        System.out.println();
+    public static CharSequence transform(String text) {
         if (text == null || text.isBlank()) {
-            System.out.println("Ошибка: строка не может быть пустой или null");
-            return;
+            throw new IllegalArgumentException(ERROR_MESSAGE);
         }
 
         final Range range = getUpperCaseRange(text);
-        final CharSequence transformedText = transform(text, range);
-        display(transformedText);
-    }
-
-    private static CharSequence transform(String text, Range range) {
         final StringBuilder transformedText = new StringBuilder(text);
         for (int i = range.begin(); i < range.end(); ++i) {
             transformedText.setCharAt(i, Character.toUpperCase(transformedText.charAt(i)));
         }
         return transformedText;
-    }
-
-    private static void display(CharSequence text) throws InterruptedException {
-        for (int i = 0; i < text.length(); ++i) {
-            System.out.print(text.charAt(i));
-            delay();
-        }
-    }
-
-    private static void delay() throws InterruptedException {
-        Thread.sleep(DELAY_VALUE);
     }
 
     private static Range getUpperCaseRange(String originalText) {

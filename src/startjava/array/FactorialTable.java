@@ -1,39 +1,34 @@
 package startjava.array;
 
 public class FactorialTable {
-    public static void main(String[] args) {
-        display();
-        display(null);
-        display(8, 0, 9);
-        display(-3, 1, 7, 13);
-        display(-22, 0);
+    private static final String WRONG_VALUE = "Ошибка: %d! не определён";
+    private static final String ERROR_MESSAGE = "Ошибка: массив не может быть null или нулевой длины";
+
+    private FactorialTable() {
     }
 
-    public static void displayRow(int number) {
-        if (number >= 0) {
-            System.out.printf("%d! = ", number);
-            if (number > 1) {
-                for (int i = 1; i <= number; ++i) {
-                    System.out.printf("%d %c ", i, i < number ? '*' : '=');
-                }
+    private static String buildLine(int number, long factorial) {
+        final StringBuilder lineBuilder = new StringBuilder();
+        lineBuilder.append("%d! = ".formatted(number));
+        if (number > 1) {
+            for (int i = 1; i <= number; ++i) {
+                lineBuilder.append("%d %c ".formatted(i, i < number ? '*' : '='));
             }
-            System.out.println(factorial(number));
-        } else {
-            System.out.printf("Ошибка: %d! не определён%n", number);
         }
+        return lineBuilder.append(factorial).toString();
     }
 
-    private static void display(int... numbers) {
-        System.out.println();
-
+    public static String[] calculate(int... numbers) {
         if (numbers == null || numbers.length == 0) {
-            System.out.println("Ошибка: массив не может быть null или нулевой длины");
-            return;
+            throw new IllegalArgumentException(ERROR_MESSAGE);
         }
 
-        for (int number : numbers) {
-            displayRow(number);
+        final String[] lines = new String[numbers.length];
+        for (int i = 0; i < numbers.length; ++i) {
+            lines[i] = numbers[i] >= 0 ? buildLine(numbers[i], factorial(numbers[i]))
+                    : WRONG_VALUE.formatted(numbers[i]);
         }
+        return lines;
     }
 
     private static long factorial(int number) {

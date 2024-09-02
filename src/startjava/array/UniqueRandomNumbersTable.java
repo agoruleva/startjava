@@ -6,47 +6,31 @@ import java.util.Random;
 public class UniqueRandomNumbersTable {
     private static final Random GENERATOR = new Random();
     private static final int NOT_FOUND = -1;
+    private static final String WRONG_COLUMN_COUNT =
+            "Ошибка: количество чисел в строке не может быть меньше 1 (%d)";
+    private static final String WRONG_RANGE = "Ошибка: левая граница (%d) > правой (%d)";
+    private static final String WRONG_LENGTH = "Ошибка: длина массива должна быть больше 0 (%d)";
 
-    public static void main(String[] args) {
-        display(-10, 20, 23);
-        display(-30, 10, 10);
-        display(-34, -34, 0);
-        display(-1, 2, -3);
-        display(5, -8, 2);
+    private UniqueRandomNumbersTable() {
     }
 
-    private static void display(int begin, int end, int count) {
-        System.out.println();
+    public static int[] generateUniqueNumbers(int begin, int end, int count) {
         if (count < 1) {
-            System.out.printf("Ошибка: количество чисел в строке не может быть меньше 1 (%d)%n", count);
-            return;
+            throw new IllegalArgumentException(WRONG_COLUMN_COUNT.formatted(count));
         }
 
         if (begin > end) {
-            System.out.printf("Ошибка: левая граница (%d) > правой (%d)%n", begin, end);
-            return;
+            throw new IllegalArgumentException(WRONG_RANGE.formatted(begin, end));
         }
 
         final int length = 3 * (end - begin + 1) / 4;
         if (length < 1) {
-            System.out.printf("Ошибка: длина массива должна быть больше 0 (%d)%n", length);
-            return;
+            throw new IllegalArgumentException(WRONG_LENGTH.formatted(length));
         }
 
-        final int[] uniqueNumbers = generateUniqueNumbers(length, begin, end);
-        display(uniqueNumbers, count);
-    }
-
-    private static void display(int[] numbers, int columnCount) {
-        for (int i = 0; i < numbers.length; ++i) {
-            System.out.printf("%4d%s", numbers[i], (i + 1) % columnCount == 0 ? System.lineSeparator() : "");
-        }
-    }
-
-    private static int[] generateUniqueNumbers(int length, int low, int high) {
         final int[] numbers = new int[length];
         for (int i = 0; i < numbers.length; ++i) {
-            numbers[i] = getNextUniqueNumber(numbers, i, low, high);
+            numbers[i] = getNextUniqueNumber(numbers, i, begin, end);
         }
         Arrays.sort(numbers);
         return numbers;
