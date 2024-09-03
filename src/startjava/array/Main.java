@@ -1,8 +1,11 @@
 package startjava.array;
 
+import startjava.array.ArrayFiltering.FilterResult;
+
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
+import static startjava.array.ArrayBoxing.boxed;
 import static startjava.array.ConsoleOutput.*;
 
 public class Main {
@@ -25,8 +28,7 @@ public class Main {
 
         manipulateArrays(parameters, p -> {
             display("   До реверса: ", p);
-            ArrayReversing.reverse(p);
-            display("После реверса: ", p);
+            display("После реверса: ", ArrayReversing.reversed(p));
         });
     }
 
@@ -49,26 +51,13 @@ public class Main {
         double[] original = ArrayFiltering.generateRandomArray();
         final int half = ArrayFiltering.calculateHalf(original);
 
-        record Input(double[] data, int index) {
-            public static Input of(double[] data, int index) {
-                return new Input(data.clone(), index);
-            }
-        }
-
-        final Input[] parameters = {
-                Input.of(original, -1),
-                Input.of(original, 15),
-                Input.of(original, 0),
-                Input.of(original, 14),
-                Input.of(original, half)
-        };
-
-        manipulateArrays(parameters, p -> {
-            display("Исходный массив", p.data(), half);
-            int zeroCount = ArrayFiltering.filter(p.data(), p.index());
-            display("Изменённый массив", p.data(), half);
-            display("Значение в ячейке [%d] = %.3f".formatted(p.index(), p.data()[p.index()]));
-            display("Количество обнулённых ячеек: %d".formatted(zeroCount));
+        final Integer[] indices = {-1, 15, 0, 14, half};
+        manipulateArrays(indices, index -> {
+            display("Исходный массив", original, half);
+            FilterResult result = ArrayFiltering.filter(original, index);
+            display("Изменённый массив", result.filtered(), half);
+            display("Значение в ячейке [%d] = %.3f".formatted(index, result.filtered()[index]));
+            display("Количество обнулённых ячеек: %d".formatted(result.count()));
         });
     }
 
@@ -104,8 +93,8 @@ public class Main {
                 Input.of(5, -8, 2)
         };
 
-        manipulateArrays(parameters, p -> display(
-                UniqueRandomNumbersTable.generateUniqueNumbers(p.begin(), p.end(), p.count()), p.count()));
+        manipulateArrays(parameters, p -> display("%4d", p.count(),
+                boxed(UniqueRandomNumbersTable.generateUniqueNumbers(p.begin(), p.end(), p.count()))));
     }
 
     private static void emulateTypewriterEffect() {

@@ -2,6 +2,8 @@ package startjava.array;
 
 import java.util.Arrays;
 
+import static startjava.array.ArrayBoxing.boxed;
+
 public class ConsoleOutput {
     private static final long DELAY_VALUE = 100;
 
@@ -28,13 +30,14 @@ public class ConsoleOutput {
 
     public static void display(String label, double[] array, int count) {
         display(label + ":");
-        displayFragment(array, 0, count);
-        displayFragment(array, count, array.length);
+        display("%6.3f", count, boxed(array));
     }
 
-    public static void display(int[] numbers, int columnCount) {
+    public static <T extends Number> void display(String format, int columnCount, T[] numbers) {
+        final String fullFormat = format + "%s";
         for (int i = 0; i < numbers.length; ++i) {
-            System.out.printf("%4d%s", numbers[i], (i + 1) % columnCount == 0 ? System.lineSeparator() : "");
+            System.out.printf(fullFormat, numbers[i],
+                    (i + 1) % columnCount == 0 || i + 1 == numbers.length ? System.lineSeparator() : "");
         }
     }
 
@@ -47,13 +50,6 @@ public class ConsoleOutput {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
-
-    private static void displayFragment(double[] array, int current, int end) {
-        for (; current < end; ++current) {
-            System.out.printf("%5.3f ", array[current]);
-        }
-        System.out.println();
     }
 
     private static void delay() throws InterruptedException {

@@ -19,19 +19,24 @@ public class ArrayFiltering {
         return testArray.length - testArray.length / 2;
     }
 
-    public static int filter(double[] data, int index) {
+    public record FilterResult(double[] filtered, int count) {
+    }
+
+    public static FilterResult filter(double[] data, int index) {
         if (!isValidIndex(data, index)) {
             throw new IllegalArgumentException(ERROR_MESSAGE.formatted(index, data.length - 1));
         }
 
+        final double[] filtered = new double[data.length];
         int zeroCount = 0;
         for (int i = 0; i < data.length; ++i) {
             if (data[i] > data[index]) {
-                data[i] = 0;
                 ++zeroCount;
+            } else {
+                filtered[i] = data[i];
             }
         }
-        return zeroCount;
+        return new FilterResult(filtered, zeroCount);
     }
 
     private static boolean isValidIndex(double[] data, int index) {

@@ -6,19 +6,15 @@ public class ArrayReversing {
     private ArrayReversing() {
     }
 
-    public static void reverse(int[] array) {
+    public static int[] reversed(int[] array) {
         if (array == null) {
             throw new IllegalArgumentException(ERROR_MESSAGE);
         }
 
-        for (int i = 0, j = array.length - 1; i < j; ++i, --j) {
-            swap(array, i, j);
+        final int[] result = new int[array.length];
+        for (int i = 0; i < array.length; ++i) {
+            result[i] = array[array.length - 1 - i];
         }
-    }
-
-    private static void swap(int[] array, int left, int right) {
-        final int temp = array[left];
-        array[left] = array[right];
-        array[right] = temp;
+        return result;
     }
 }
